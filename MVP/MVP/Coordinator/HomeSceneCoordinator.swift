@@ -34,8 +34,7 @@ extension HomeSceneCoordinator: BasicCoordinationProtocol {
 
 extension HomeSceneCoordinator: MainCoordinationProtocol {
     enum Destinition {
-        case productsForAdult
-        case productsForChildren
+        case filmDescription
     }
     
     func coordinate(destinition: HomeSceneCoordinator.Destinition) {
