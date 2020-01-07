@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  MVP
 //
 //  Created by Nikita Lizogubov on 07.01.2020.
@@ -8,13 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
+    public weak var presenter: HomePresenterProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
+    }
 
 }
 
+extension HomeViewController: HomeViewProtocol {
+    
+}
