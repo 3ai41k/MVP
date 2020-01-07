@@ -6,49 +6,22 @@
 //  Copyright © 2020 Nikita Lizogubov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-enum Scene {
-    case home
-    case settings
-    case popular
-}
-
-protocol MainSceneBuilderProtocol {
-    func build(scene: Scene) -> UIViewController
-}
-
 protocol HomeSceneBuilderProtocol {
-    func initializeHomeView() -> UIViewController
+    func initializeHomeView(coordinator: HomeSceneCoordinator) -> UIViewController
 }
 
 protocol SettingsSceneBuilderProtocol {
-    func initializeSettingsView() -> UIViewController
+    func initializeSettingsView(coordinator: SettingsSceneCoordinator) -> UIViewController
 }
 
-protocol PopularSceneBuilderProtocol {
-    func initializePopularView() -> UIViewController
-}
-
-struct SceneBuilder: MainSceneBuilderProtocol {
-    func build(scene: Scene) -> UIViewController {
-        switch scene {
-        case .home:
-            return initializeHomeView()
-        case .settings:
-            return initializeSettingsView()
-        case .popular:
-            return initializePopularView()
-        }
-    }
-    
-}
+struct SceneBuilder { }
 
 extension SceneBuilder: HomeSceneBuilderProtocol {
-    func initializeHomeView() -> UIViewController {
+    func initializeHomeView(coordinator: HomeSceneCoordinator) -> UIViewController {
         let view = HomeViewController()
-        let presenter = HomePresenter(view: view)
+        let presenter = HomePresenter(view: view, coordinator: coordinator)
         view.presenter = presenter
         return view
     }
@@ -56,15 +29,11 @@ extension SceneBuilder: HomeSceneBuilderProtocol {
 }
 
 extension SceneBuilder: SettingsSceneBuilderProtocol {
-    func initializeSettingsView() -> UIViewController {
-        return UIViewController()
-    }
-    
-}
-
-extension SceneBuilder: PopularSceneBuilderProtocol {
-    func initializePopularView() -> UIViewController {
-        return UIViewController()
+    func initializeSettingsView(coordinator: SettingsSceneCoordinator) -> UIViewController {
+        let view = SettingsViewController()
+        let presenter = SettingsPresenter(view: view, coordinator: coordinator)
+        view.presenter = presenter
+        return view
     }
     
 }

@@ -13,13 +13,15 @@ protocol HomeViewProtocol: class {
 }
 
 protocol HomePresenterProtocol: class {
-    init(view: HomeViewProtocol)
+    init(view: HomeViewProtocol, coordinator: HomeSceneCoordinator)
 }
 
 class HomePresenter: HomePresenterProtocol {
     private let view: HomeViewProtocol
+    private let coordinator: HomeSceneCoordinator
     
-    required init(view: HomeViewProtocol) {
+    required init(view: HomeViewProtocol, coordinator: HomeSceneCoordinator) {
         self.view = view
+        self.coordinator = coordinator
     }
 }

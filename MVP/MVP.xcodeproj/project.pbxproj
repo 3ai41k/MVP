@@ -17,6 +17,11 @@
 		8DC70EFF23C4C62300221384 /* SceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70EFE23C4C62300221384 /* SceneBuilder.swift */; };
 		8DC70F0123C4C8C900221384 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70F0023C4C8C900221384 /* HomePresenter.swift */; };
 		8DC70F0323C4CB1A00221384 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DC70F0223C4CB1A00221384 /* Main.storyboard */; };
+		8DC70F0523C4CB8B00221384 /* HomeSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70F0423C4CB8B00221384 /* HomeSceneCoordinator.swift */; };
+		8DC70F0823C4D13A00221384 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70F0623C4D13A00221384 /* SettingsViewController.swift */; };
+		8DC70F0923C4D13A00221384 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8DC70F0723C4D13A00221384 /* SettingsViewController.xib */; };
+		8DC70F0B23C4D16800221384 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70F0A23C4D16800221384 /* SettingsPresenter.swift */; };
+		8DC70F0D23C4D21700221384 /* SettingsSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC70F0C23C4D21700221384 /* SettingsSceneCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		8DC70EFE23C4C62300221384 /* SceneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneBuilder.swift; sourceTree = "<group>"; };
 		8DC70F0023C4C8C900221384 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		8DC70F0223C4CB1A00221384 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8DC70F0423C4CB8B00221384 /* HomeSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSceneCoordinator.swift; sourceTree = "<group>"; };
+		8DC70F0623C4D13A00221384 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8DC70F0723C4D13A00221384 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		8DC70F0A23C4D16800221384 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
+		8DC70F0C23C4D21700221384 /* SettingsSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC70F0023C4C8C900221384 /* HomePresenter.swift */,
+				8DC70F0A23C4D16800221384 /* SettingsPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -89,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC70EFA23C4C5F800221384 /* HomeViewController.swift */,
+				8DC70F0623C4D13A00221384 /* SettingsViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -146,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				8DC70EFB23C4C5F800221384 /* HomeViewController.xib */,
+				8DC70F0723C4D13A00221384 /* SettingsViewController.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -153,6 +166,8 @@
 		8DC70EF723C4C4D400221384 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				8DC70F0423C4CB8B00221384 /* HomeSceneCoordinator.swift */,
+				8DC70F0C23C4D21700221384 /* SettingsSceneCoordinator.swift */,
 				8DC70EF823C4C4FF00221384 /* ApplicationCoordinator.swift */,
 				8DC70EFE23C4C62300221384 /* SceneBuilder.swift */,
 			);
@@ -221,6 +236,7 @@
 				8DC70EE423C4C42900221384 /* Assets.xcassets in Resources */,
 				8DC70EFD23C4C5F800221384 /* HomeViewController.xib in Resources */,
 				8DC70F0323C4CB1A00221384 /* Main.storyboard in Resources */,
+				8DC70F0923C4D13A00221384 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,12 +247,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DC70F0523C4CB8B00221384 /* HomeSceneCoordinator.swift in Sources */,
 				8DC70EDB23C4C42800221384 /* AppDelegate.swift in Sources */,
 				8DC70EDD23C4C42800221384 /* SceneDelegate.swift in Sources */,
 				8DC70EF923C4C4FF00221384 /* ApplicationCoordinator.swift in Sources */,
 				8DC70F0123C4C8C900221384 /* HomePresenter.swift in Sources */,
+				8DC70F0B23C4D16800221384 /* SettingsPresenter.swift in Sources */,
 				8DC70EFC23C4C5F800221384 /* HomeViewController.swift in Sources */,
 				8DC70EFF23C4C62300221384 /* SceneBuilder.swift in Sources */,
+				8DC70F0D23C4D21700221384 /* SettingsSceneCoordinator.swift in Sources */,
+				8DC70F0823C4D13A00221384 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
