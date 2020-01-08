@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class HomeSceneCoordinator {
     private var navigationController: UINavigationController!
@@ -34,11 +35,25 @@ extension HomeSceneCoordinator: BasicCoordinationProtocol {
 
 extension HomeSceneCoordinator: MainCoordinationProtocol {
     enum Destinition {
-        case filmDescription
+        case playFilm(_ film: Film)
     }
     
     func coordinate(destinition: HomeSceneCoordinator.Destinition) {
-        
+        switch destinition {
+        case .playFilm(let film):
+            presentVideoPlayer(withFilm: film)
+        }
+    }
+    
+    private func presentVideoPlayer(withFilm film: Film) {
+        let filmURL = film.url
+        let player = AVPlayer(url: filmURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        playerViewController.modalPresentationStyle = .fullScreen
+        navigationController.present(playerViewController, animated: true) {
+            player.play()
+        }
     }
     
 }

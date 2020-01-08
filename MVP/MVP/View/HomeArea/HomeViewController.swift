@@ -27,6 +27,21 @@ class HomeViewController: HomeNavigationController {
             filmCollectionView.reloadData()
         }
     }
+    private var trailerView: TrailerView? {
+        didSet {
+            guard let trailerView = trailerView else { return }
+            trailerView.backgroundColor = .black
+            
+            view.addSubview(trailerView)
+            trailerView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                trailerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8.0),
+                trailerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8.0),
+                trailerView.widthAnchor.constraint(equalToConstant: 100.0),
+                trailerView.heightAnchor.constraint(equalToConstant: 75.0)
+            ])
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +69,7 @@ class HomeViewController: HomeNavigationController {
 extension HomeViewController: HomeViewProtocol {
     func showFilms(_ films: Array<Film>) {
         listOfFilms = films
+        trailerView = TrailerView(films: films)
     }
     
     func showError(_ description: String) {
@@ -87,7 +103,10 @@ extension HomeViewController: UICollectionViewDataSource {
 }
 
 extension HomeViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let film = listOfFilms[indexPath.row]
+        presenter?.playFilm(film)
+    }
     
 }
 

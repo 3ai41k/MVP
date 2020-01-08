@@ -16,6 +16,7 @@ protocol HomeViewProtocol: class {
 protocol HomePresenterProtocol: class {
     init(view: HomeViewProtocol, coordinator: HomeSceneCoordinator, dataService: DataService)
     func fetchFilms()
+    func playFilm(_ film: Film)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -39,6 +40,10 @@ class HomePresenter: HomePresenterProtocol {
                 view?.showError(description)
             }
         }
+    }
+    
+    func playFilm(_ film: Film) {
+        coordinator.coordinate(destinition: .playFilm(film))
     }
     
 }

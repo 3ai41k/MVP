@@ -14,4 +14,5 @@ struct Film {
     let year: Int
     let description: String
     let raiting: Double
+    let url: URL
 }
