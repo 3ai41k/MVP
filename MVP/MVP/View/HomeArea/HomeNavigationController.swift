@@ -10,6 +10,7 @@ import UIKit
 
 class HomeNavigationController: UIViewController {
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,6 +19,7 @@ class HomeNavigationController: UIViewController {
         setupNavigatiuonControllerButtons()
     }
     
+    // MARK: - Private methods
     private func setupNavigationControllerStyle() {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -51,6 +53,7 @@ class HomeNavigationController: UIViewController {
         navigationItem.rightBarButtonItems = [searchBarButtonItem, topRateButtonItem]
     }
     
+    // MARK: - Actions
     @objc
     private func didSearch(_ sender: Any) {
         

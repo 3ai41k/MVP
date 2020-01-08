@@ -10,6 +10,7 @@ import UIKit
 
 class HomeTitleView: UIView {
     
+    // MARK: - Private properties
     private var titleLabel: UILabel! {
         didSet {
             titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -20,6 +21,7 @@ class HomeTitleView: UIView {
         }
     }
     
+    // MARK: - Override
     override init(frame: CGRect) {
         super.init(frame: frame)
         initComponents()
@@ -30,6 +32,7 @@ class HomeTitleView: UIView {
         initComponents()
     }
     
+    // MARK: - Private methods
     private func initComponents() {
         titleLabel = UILabel()
         setupConstraints()

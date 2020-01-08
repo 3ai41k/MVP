@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: HomeNavigationController {
 
+    // MARK: - IBOutlets
     @IBOutlet private weak var filmCollectionView: UICollectionView! {
         didSet {
             filmCollectionView.dataSource = self
@@ -20,8 +21,10 @@ class HomeViewController: HomeNavigationController {
         }
     }
     
+    // MARK: - Public properties
     public var presenter: HomePresenterProtocol?
     
+    // MARK: - Private properties
     private var listOfFilms: Array<Film> = Array() {
         didSet {
             filmCollectionView.reloadData()
@@ -30,8 +33,14 @@ class HomeViewController: HomeNavigationController {
     private var trailerView: TrailerView? {
         didSet {
             guard let trailerView = trailerView else { return }
-            trailerView.backgroundColor = .black
             
+            // setup action
+            trailerView.handleTrailerClick = { [weak self] film in
+                self?.presenter?.playFilm(film)
+                trailerView.playerAction = .pause
+            }
+            
+            // setup constraints
             view.addSubview(trailerView)
             trailerView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -43,12 +52,20 @@ class HomeViewController: HomeNavigationController {
         }
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         presenter?.fetchFilms()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        trailerView?.playerAction = .play
+    }
+    
+    // MARK: - Private methods
     private func countCellWidth() -> CGFloat {
         let totalSpacing = Constants.numberOfItemsPerRow * Constants.cellInset.left + Constants.numberOfItemsPerRow * Constants.cellInset.right
         let cellWidth = (filmCollectionView.bounds.width - totalSpacing) / Constants.numberOfItemsPerRow
@@ -66,6 +83,7 @@ class HomeViewController: HomeNavigationController {
 
 }
 
+// MARK: - HomeViewProtocol
 extension HomeViewController: HomeViewProtocol {
     func showFilms(_ films: Array<Film>) {
         listOfFilms = films
@@ -78,6 +96,7 @@ extension HomeViewController: HomeViewProtocol {
     
 }
 
+// MARK: - UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return listOfFilms.count
@@ -102,14 +121,17 @@ extension HomeViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let film = listOfFilms[indexPath.row]
         presenter?.playFilm(film)
+        trailerView?.playerAction = .pause
     }
     
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let film = listOfFilms[indexPath.row]
@@ -126,8 +148,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+// MARK: - Constants
 private extension HomeViewController {
-    
     private struct Constants {
         private init() { }
         static let cellReuseIdentifier = "filmCollectionViewCellReuseIdentifier"

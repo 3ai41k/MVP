@@ -10,6 +10,7 @@ import UIKit
 
 class CollectionHeaderView: UICollectionReusableView {
     
+    // MARK: - Private properties
     private var headerView: HeaderView! {
         didSet {
             headerView.translatesAutoresizingMaskIntoConstraints = false
@@ -17,6 +18,7 @@ class CollectionHeaderView: UICollectionReusableView {
         }
     }
     
+    // MARK: - Override
     override init(frame: CGRect) {
         super.init(frame: frame)
         initComponents()
@@ -27,6 +29,7 @@ class CollectionHeaderView: UICollectionReusableView {
         initComponents()
     }
     
+    // MARK: - Private methods
     private func initComponents() {
         headerView = HeaderView()
         setupConstraints()
