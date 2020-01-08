@@ -21,7 +21,10 @@ struct SceneBuilder { }
 extension SceneBuilder: HomeSceneBuilderProtocol {
     func initializeHomeView(coordinator: HomeSceneCoordinator) -> UIViewController {
         let view = HomeViewController()
-        let presenter = HomePresenter(view: view, coordinator: coordinator)
+        let dataService = DataService()
+        let presenter = HomePresenter(view: view,
+                                      coordinator: coordinator,
+                                      dataService: dataService)
         view.presenter = presenter
         return view
     }

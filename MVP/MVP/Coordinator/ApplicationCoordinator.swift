@@ -40,6 +40,10 @@ class AppCoordinator {
     }
     
     private func initializeTabBarController() {
+        let filmImage = UIImage(systemName: "film.fill")
+        let gearImage = UIImage(systemName: "gear")
+        controllers[0].tabBarItem = UITabBarItem(title: "Films", image: filmImage, selectedImage: nil)
+        controllers[1].tabBarItem = UITabBarItem(title: "Settings", image: gearImage, selectedImage: nil)
         tabBar.viewControllers = controllers
     }
     

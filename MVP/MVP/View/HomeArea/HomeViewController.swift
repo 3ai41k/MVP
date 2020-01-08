@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: HomeNavigationController {
 
     @IBOutlet private weak var filmCollectionView: UICollectionView! {
         didSet {
@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
             filmCollectionView.delegate = self
             
             filmCollectionView.register(FilmCollectionViewCell.nib, forCellWithReuseIdentifier: Constants.cellReuseIdentifier)
+            filmCollectionView.register(CollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Constants.headerViewReuseIdentifier)
         }
     }
     
@@ -31,41 +32,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         presenter?.fetchFilms()
-        
-        setupTitleView()
-        setupNavigatiuonControllerButtons()
-    }
-    
-    private func setupTitleView() {
-        
-    }
-    
-    private func setupNavigatiuonControllerButtons() {
-        // rightBarButtonItem
-        let magnifyingGlassImage = UIImage(systemName: "magnifyingglass.circle")
-        let searchBarButtonItem = UIBarButtonItem(image: magnifyingGlassImage,
-                                                  style: .done,
-                                                  target: self,
-                                                  action: #selector(didSearch))
-        // leftBarButtonItem
-        let starImage = UIImage(systemName: "star.circle.fill")
-        let topRateButtonItem = UIBarButtonItem(image: starImage,
-                                                style: .done,
-                                                target: self,
-                                                action: #selector(didTopRateFilms))
-        
-        navigationItem.leftBarButtonItem = topRateButtonItem
-        navigationItem.rightBarButtonItem = searchBarButtonItem
-    }
-    
-    @objc
-    private func didSearch(_ sender: Any) {
-        
-    }
-    
-    @objc
-    private func didTopRateFilms(_ sender: Any) {
-        
     }
     
     private func countCellWidth() -> CGFloat {
@@ -90,6 +56,10 @@ extension HomeViewController: HomeViewProtocol {
         listOfFilms = films
     }
     
+    func showError(_ description: String) {
+        print(description)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -102,6 +72,16 @@ extension HomeViewController: UICollectionViewDataSource {
         let film = listOfFilms[indexPath.row]
         cell.configurate(film)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.headerViewReuseIdentifier, for: indexPath)
+        return headerView
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let headerViewWidth = collectionView.bounds.width
+        return CGSize(width: headerViewWidth, height: Constants.headerViewHeight)
     }
     
 }
@@ -132,8 +112,10 @@ private extension HomeViewController {
     private struct Constants {
         private init() { }
         static let cellReuseIdentifier = "filmCollectionViewCellReuseIdentifier"
+        static let headerViewReuseIdentifier = "filmCollectionViewHeaderViewReuseIdentifier"
         static let numberOfItemsPerRow: CGFloat = 2.0
-        static let cellInset = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0)
+        static let cellInset = UIEdgeInsets(top: 5.0, left: 5.0, bottom: .zero, right: 5.0)
+        static let headerViewHeight: CGFloat = 100.0
     }
     
 }

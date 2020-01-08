@@ -10,7 +10,21 @@ import UIKit
 
 class FilmCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet private weak var containerView: UIView! {
+        didSet {
+            containerView.layer.cornerRadius = 5.0
+            containerView.layer.shadowColor = UIColor.systemGray.cgColor
+            containerView.layer.shadowRadius = 2.0
+            containerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            containerView.layer.shadowOpacity = 1.0
+        }
+    }
     @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var ImageView: UIImageView! {
+        didSet {
+            ImageView.layer.cornerRadius = 5.0
+        }
+    }
     @IBOutlet private weak var yearLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var ratingLabel: UILabel!
@@ -35,12 +49,14 @@ class FilmCollectionViewCell: UICollectionViewCell {
     public var preferredMaxLayoutWidth: CGFloat = .zero {
         didSet {
             descriptionLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
+            nameLabel.preferredMaxLayoutWidth = preferredMaxLayoutWidth
         }
     }
     
     public func configurate(_ model: Film) {
         nameLabel.text = model.name
-        yearLabel.text = model.year
+        ImageView.image = UIImage(named: model.imageName)
+        yearLabel.text = String(model.year)
         descriptionLabel.text = model.description
         ratingLabel.text = String(model.raiting)
     }

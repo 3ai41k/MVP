@@ -10,8 +10,8 @@ import Foundation
 
 struct Film {
     let name: String
-    let imageStringURL: String
-    let year: String
+    let imageName: String
+    let year: Int
     let description: String
-    let raiting: Int
+    let raiting: Double
 }
